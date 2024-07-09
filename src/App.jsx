@@ -50,7 +50,10 @@ function WeatherApp() {
       {weatherData && (
         <div className="sm:grid sm:grid-cols-2 bg-blue-300  mx-auto   p-7 gap-2">
           <div className="w-full bg-transparent  text-center mb-2">
-            <h1 className="text-4xl">{weatherData.address}</h1>
+            <h1 className="text-4xl">
+              <i className="fa-solid fa-location-dot text-2xl"></i>{" "}
+              {weatherData.address}
+            </h1>
             <p>{weatherData.resolvedAddress}</p>
           </div>
           <div className="w-full bg-transparent  text-center mb-2">
