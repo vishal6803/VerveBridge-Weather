@@ -1,0 +1,43 @@
+/* .direction-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+} */
+
+.arrow-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid red;
+  transition: transform 0.5s ease;
+}
+#n {
+  position: absolute;
+  top: 0;
+}
+#s {
+  position: absolute;
+  bottom: 0;
+}
+#w {
+  position: absolute;
+  left: 0;
+}
+#e {
+  position: absolute;
+  right: 0;
+}

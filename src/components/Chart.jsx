@@ -35,7 +35,7 @@ function Chart({ weatherData }) {
   return (
     <div className="">
       {weatherData.days && (
-        <ResponsiveContainer width="100%" aspect={3}>
+        <ResponsiveContainer width={1000} aspect={3}>
           <LineChart data={hoursData}>
             <CartesianGrid strokeDasharray="4 4" />
             <XAxis dataKey="datetime" interval="preserveEnd" />

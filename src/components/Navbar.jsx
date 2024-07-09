@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 w-full">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" className="flex items-center">
+        <a href="#" className="flex items-center justify-center">
           <img
             src="https://cdn-icons-png.flaticon.com/128/12607/12607703.png"
             className="h-8 mr-3"

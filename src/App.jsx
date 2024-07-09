@@ -4,6 +4,8 @@ import Chart from "./components/Chart";
 import SvgComponent from "./components/SvgComponent";
 import { LocationContext } from "./context/context";
 import DaysChart from "./components/DaysChart";
+import WindDirection from "./components/WindDirection";
+import Table from "./components/Table";
 function WeatherApp() {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -45,180 +47,96 @@ function WeatherApp() {
           <SvgComponent />
         </div>
       )}
-      <div className="container mx-auto p-4 mt-8">
-        {weatherData && (
-          <>
-            <div className="mx-auto p-4 h-screen  flex justify-center">
-              <div className="flex flex-wrap">
-                <div className="w-full   px-2">
-                  <div className="bg-gray-900 text-white relative min-w-0 break-words rounded-lg overflow-hidden shadow-sm mb-4 w-full bg-white dark:bg-gray-600">
-                    <div className="px-6 py-6 relative">
-                      <div className="flex mb-4 justify-between items-center">
-                        <div>
-                          <h5 className="mb-0 font-medium text-xl">
-                            {weatherData.address}
-                          </h5>
-                          <h6 className="mb-0">
-                            {weatherData.days[0].datetime}
-                          </h6>
-                          <small>{weatherData.currentConditions.icon}</small>
-                        </div>
-                        <div className="text-right">
-                          <h3 className="font-bold text-4xl mb-0">
-                            <span>
-                              <i class="fa-solid fa-temperature-half"></i>{" "}
-                              {parseInt(weatherData.currentConditions.temp)}°
-                            </span>
-                          </h3>
-                        </div>
-                      </div>
-                      <div className="block sm:flex justify-between items-center flex-wrap">
-                        <div className="w-full sm:w-1/2">
-                          <div className="flex mb-2 justify-between items-center">
-                            <span>Temp</span>
-                            <small className="px-2 inline-block">
-                              39.11&nbsp;°
-                            </small>
-                          </div>
-                        </div>
-                        <div className="w-full sm:w-1/2">
-                          <div className="flex mb-2 justify-between items-center">
-                            <span>Feels like</span>
-                            <small className="px-2 inline-block">
-                              {parseInt(
-                                weatherData.currentConditions.feelslike
-                              )}
-                              &nbsp;°
-                            </small>
-                          </div>
-                        </div>
-                        <div className="w-full sm:w-1/2">
-                          <div className="flex mb-2 justify-between items-center">
-                            <span>Temp min</span>
-                            <small className="px-2 inline-block">
-                              {parseInt(weatherData.days[0].tempmin)}&nbsp;°
-                            </small>
-                          </div>
-                        </div>
-                        <div className="w-full sm:w-1/2">
-                          <div className="flex mb-2 justify-between items-center">
-                            <span>Temp max</span>
-                            <small className="px-2 inline-block">
-                              39&nbsp;°
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="divider table mx-2 text-center bg-transparent whitespace-nowrap">
-                      <span className="inline-block px-3">
-                        {/* <small>Forecast</small> */}
-                      </span>
-                    </div>
-                    <div className="px-6 py-6 relative">
-                      <div className="bg-gray-500 p-5 rounded-md">
-                        <div className="w-full sm:w-1/2">
-                          <div className="flex mb-2 justify-between items-center">
-                            <span>humidity</span>
-                            <small className="px-2 inline-block">
-                              {weatherData.currentConditions.humidity}&nbsp;%
-                            </small>
-                          </div>
-                        </div>
-                        <div className="w-full sm:w-1/2">
-                          <div className="flex mb-2 justify-between items-center">
-                            <span>Pressure</span>
-                            <small className="px-2 inline-block">
-                              {weatherData.currentConditions.pressure}&nbsp;mbar
-                            </small>
-                          </div>
-                        </div>
-                        <div className="w-full sm:w-1/2">
-                          <div className="flex mb-2 justify-between items-center">
-                            <span>UV</span>
-                            <small className="px-2 inline-block">
-                              {weatherData.currentConditions.uvindex}&nbsp;
-                            </small>
-                          </div>
-                        </div>
-                        <div className="w-full sm:w-1/2">
-                          <div className="flex mb-2 justify-between items-center">
-                            <span>Conditions</span>
-                            <small className="px-2 inline-block">
-                              {weatherData.currentConditions.conditions}&nbsp;
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="px-6 py-6 relative">
-                      <div className="bg-gray-500 p-5 rounded-md">
-                        <div className="w-full sm:w-1/2">
-                          <div className="flex mb-2 justify-between items-center">
-                            <span>Sunset</span>
-                            <small className="px-2 inline-block">
-                              {weatherData.currentConditions.sunset}&nbsp;
-                            </small>
-                          </div>
-                        </div>
-                        <div className="w-full sm:w-1/2">
-                          <div className="flex mb-2 justify-between items-center">
-                            <span>Sunrise</span>
-                            <small className="px-2 inline-block">
-                              {weatherData.currentConditions.sunrise}&nbsp;
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {weatherData && <Chart weatherData={weatherData} />}
+      {weatherData && (
+        <div className="sm:grid sm:grid-cols-2 bg-blue-300  mx-auto   p-7 gap-2">
+          <div className="w-full bg-transparent  text-center mb-2">
+            <h1 className="text-4xl">{weatherData.address}</h1>
+            <p>{weatherData.resolvedAddress}</p>
+          </div>
+          <div className="w-full bg-transparent  text-center mb-2">
+            <h1 className="text-5xl">
+              {parseInt(weatherData.currentConditions.temp)}°
+            </h1>
+            <p>
+              {weatherData.currentConditions.conditions}{" "}
+              <span className="my-3">
+                {parseInt(weatherData.days[0].tempmax)}° /
+                {parseInt(weatherData.days[0].tempmin)}°
+              </span>
+            </p>
+          </div>
+          <div className="w-full bg-blue-400 p-3 rounded-md text-white divide-y divide-blue-300 mb-2">
+            <div className="my-3">
+              Humidity
+              <span className="float-end me-2 font-semibold ">
+                {" "}
+                {parseInt(weatherData.currentConditions.humidity)}%
+              </span>
             </div>
-
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <h2 className="text-xl font-semibold mb-2">
-                Forecast of 15 days
-              </h2>
-              {/* <ul>
-                {weatherData.days.map((day, index) => (
-                  <li key={index}>
-                    {day.datetime} - High: {day.tempmax}°C, Low: {day.tempmin}
-                    °C
-                  </li>
-                ))}
-              </ul> */}
-              <div className="w-full flex">
-                <table className="w-1/3 text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                      <th>Date</th>
-                      <th>Temp</th>
-                      <th>Temp Max</th>
-                      <th>Temp Min</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {weatherData.days.map((day, index) => (
-                      <tr key={index} className="border">
-                        <td>{day.datetime}</td>
-                        <td>{parseInt(day.temp) + " °"}</td>
-                        <td>{parseInt(day.tempmax) + " °"}</td>
-                        <td>{parseInt(day.tempmin) + " °"}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <div className="w-full mt-11">
-                  {weatherData && <DaysChart weatherData={weatherData} />}
-                </div>
-              </div>
+            <div className="my-3">
+              Feels like
+              <span className="float-end me-2 font-semibold">
+                {" "}
+                {parseInt(weatherData.currentConditions.feelslike)}°
+              </span>
             </div>
-          </>
-        )}
-      </div>
+            <div className="my-3">
+              UV
+              <span className="float-end me-2 font-semibold">
+                {" "}
+                {parseInt(weatherData.currentConditions.uvindex)}
+              </span>
+            </div>
+            <div className="my-3">
+              Pressure
+              <span className="float-end me-2 font-semibold">
+                {parseInt(weatherData.currentConditions.pressure)}
+                <sub>mbar</sub>
+              </span>
+            </div>
+            <div className="my-3">
+              Visibility
+              <span className="float-end me-2 font-semibold">
+                {parseInt(weatherData.currentConditions.visibility)}%
+              </span>
+            </div>
+          </div>
+          <div className="w-full bg-blue-400 flex justify-around items-center rounded-md text-white mb-2 p-3">
+            <div>
+              Wind Speed --
+              <span className="font-bold">
+                {weatherData.currentConditions.windspeed}km/h
+              </span>{" "}
+              <br />
+              Wind Direction --
+              <span className="font-bold">
+                {weatherData.currentConditions.winddir} deg
+              </span>
+            </div>
+            <div>
+              <WindDirection degree={weatherData.currentConditions.winddir} />
+            </div>
+          </div>
+          <div className="w-full col-span-2 bg-blue-400 justify-around rounded-md text-white p-3 mb-3">
+            <h2 className="mb-2">24 hour forecast</h2>
+            <div className="overflow-x-scroll flex justify-center">
+              {weatherData.days && <Chart weatherData={weatherData} />}
+            </div>
+          </div>
+          <div className="w-full col-span-2 bg-blue-400 justify-around rounded-md text-white p-3 mb-2">
+            <h2 className="mb-2">Toady's Max Min and Average Temprature</h2>
+            <div className="overflow-x-scroll flex justify-center">
+              {weatherData.days && <DaysChart weatherData={weatherData} />}
+            </div>
+          </div>
+          <div className=" bg-blue-400 rounded-lg col-span-2 text-white w-full mb-2 p-3">
+            <h2 className="mb-2">15 Days Forecast</h2>
+            <div className="">
+              <Table weatherData={weatherData} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
